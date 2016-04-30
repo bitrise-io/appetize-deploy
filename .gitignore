@@ -1,0 +1,6 @@
+/bin
+/vendor
+/box.phar
+
+# Bitrise
+.envstore.yml

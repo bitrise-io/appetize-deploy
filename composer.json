@@ -1,0 +1,24 @@
+{
+  "name": "dag-io/appetize-deploy",
+  "description": "Deploy an app on Appetize.io",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Damien Gavard",
+      "email": "damien.gavard@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "DAG\\Appetize\\Deploy\\": "src"
+    }
+  },
+  "minimum-stability": "stable",
+  "require": {
+    "symfony/console": "^3.0",
+    "guzzlehttp/guzzle": "^6.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5.3"
+  }
+}
