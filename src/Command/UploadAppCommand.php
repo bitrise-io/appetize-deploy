@@ -35,19 +35,19 @@ final class UploadAppCommand extends Command
         $appPath = $input->getArgument('app-path');
 
         if ($platform == 'ios' || $platform == 'android') {
+            $output->writeln(sprintf('App found : "%s"', $appPath));
+
             if ($platform == 'ios') {
                 $bundleArchive = new IOSArchive();
+                $uploadFilePath = $bundleArchive->create($appPath);
+                $output->writeln(sprintf('Archive created in "%s"', $uploadFilePath));
             } else {
-                $bundleArchive = new AndroidArchive();
+                $uploadFilePath = $appPath;
             }
-
-            $zipFilePath = $bundleArchive->create($appPath);
-
-            $output->writeln(sprintf('Archive created in "%s"', $zipFilePath));
 
             $uploadApi = new UploadApi();
             $response = $uploadApi->upload(
-                $zipFilePath,
+                $uploadFilePath,
                 $input->getArgument('token'),
                 $platform,
                 $input->getOption('public-key')
