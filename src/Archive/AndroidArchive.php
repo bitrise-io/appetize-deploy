@@ -18,7 +18,7 @@ final class AndroidArchive extends AbstractArchive implements ArchiveInterface
      */
     public function create($appFilePath)
     {
-        if (!file_exists($appFilePath) || !is_readable($appFilePath) || !is_dir($appFilePath)) {
+        if (!file_exists($appFilePath) || !is_readable($appFilePath) || !is_file($appFilePath)) {
             throw new \Exception(sprintf('Invalid file provided "%s"', $appFilePath));
         }
 
