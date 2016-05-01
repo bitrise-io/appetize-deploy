@@ -15,7 +15,7 @@ $inputArg = [
     isset($_SERVER['appetize_token']) ? $_SERVER['appetize_token'] : null,
 ];
 
-if (isset($_SERVER['public_key'])) {
+if (isset($_SERVER['public_key']) && $_SERVER['public_key']) {
     $inputArg[] = '--public-key='.$_SERVER['public_key'];
 }
 
