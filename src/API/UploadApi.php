@@ -13,10 +13,11 @@ final class UploadApi
      * @param string $token
      * @param string $platform
      * @param string $publicKey
+     * @param false  $protectedByAccount
      *
      * @throws \Exception
      */
-    public function upload($appFilePath, $token, $platform, $publicKey = null)
+    public function upload($appFilePath, $token, $platform, $publicKey = null, $protectedByAccount = false)
     {
         $client = new Client();
 
@@ -34,6 +35,10 @@ final class UploadApi
                     [
                         'name' => 'platform',
                         'contents' => $platform,
+                    ],
+                    [
+                        'name' => 'protectedByAccount',
+                        'contents' => $protectedByAccount ? '1' : '0',
                     ],
                     [
                         'name' => 'file',

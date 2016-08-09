@@ -19,6 +19,10 @@ if (isset($_SERVER['public_key']) && $_SERVER['public_key']) {
     $inputArg[] = '--public-key='.$_SERVER['public_key'];
 }
 
+if (isset($_SERVER['protected_by_account']) && $_SERVER['protected_by_account']) {
+    $inputArg[] = '--protected-by-account';
+}
+
 $input = new ArgvInput($inputArg);
 
 $application = new Application(

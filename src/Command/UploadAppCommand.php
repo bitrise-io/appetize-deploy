@@ -2,7 +2,6 @@
 namespace DAG\Appetize\Deploy\Command;
 
 use DAG\Appetize\Deploy\API\UploadApi;
-use DAG\Appetize\Deploy\Archive\AndroidArchive;
 use DAG\Appetize\Deploy\Archive\IOSArchive;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
@@ -23,6 +22,7 @@ final class UploadAppCommand extends Command
             ->addArgument('app-path', InputArgument::REQUIRED, 'The path to the .app or .apk')
             ->addArgument('platform', InputArgument::REQUIRED, 'The platform. Either "ios" or "android"')
             ->addArgument('token', InputArgument::REQUIRED, 'The token provided by Appetize.io')
+            ->addOption('protected-by-account', InputOption::VALUE_NONE, 'Protect the build to those who have an account')
             ->addOption('public-key', null, InputOption::VALUE_REQUIRED, 'A public key to upload to the same app');
     }
 
@@ -50,7 +50,8 @@ final class UploadAppCommand extends Command
                 $uploadFilePath,
                 $input->getArgument('token'),
                 $platform,
-                $input->getOption('public-key')
+                $input->getOption('public-key'),
+                $input->getOption('protected-by-account')
             );
 
             $output->writeln('Upload success');
