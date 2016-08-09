@@ -2,9 +2,9 @@
 namespace DAG\Appetize\Deploy\API;
 
 /**
- * Class Response
+ * Class UploadResponse
  */
-final class Response
+final class UploadResponse
 {
     /** @var string */
     private $publicKey;
@@ -13,7 +13,7 @@ final class Response
     private $appURL;
 
     /**
-     * Response constructor.
+     * UploadResponse constructor.
      *
      * @param string $publicKey
      * @param string $appURL
