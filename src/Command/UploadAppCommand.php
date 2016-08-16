@@ -47,6 +47,10 @@ final class UploadAppCommand extends Command
 
             $uploadApi = new Api($input->getArgument('token'));
 
+            if ($input->getOption('protected-by-account')) {
+                $output->writeln('Uploading the app with account protection');
+            }
+
             $response = $uploadApi->upload(
                 $uploadFilePath,
                 $platform,

@@ -49,7 +49,7 @@ final class Api
                     ],
                     [
                         'name' => 'protectedByAccount',
-                        'contents' => $protectedByAccount ? '1' : '0',
+                        'contents' => (bool)$protectedByAccount,
                     ],
                     [
                         'name' => 'file',
