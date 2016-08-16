@@ -3,6 +3,7 @@ namespace DAG\Appetize\Deploy\Command;
 
 use DAG\Appetize\Deploy\API\Api;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -21,10 +22,20 @@ final class ProtectAllBuildsCommand extends Command
         $api = new Api($input->getArgument('token'));
         $builds = $api->fetchAll();
 
+        $progress = new ProgressBar($output, count($builds));
+        $buildChangedCount = 0;
+
         foreach ($builds as $build) {
-            $api->protectBuild($build['publicKey']);
+            if (!isset($build['protectedByAccount']) || !$build['protectedByAccount']) {
+                $api->protectBuild($build['publicKey']);
+                $buildChangedCount++;
+            }
+            $progress->advance();
+            $progress->display();
         }
 
-        return;
+        $output->writeln("");
+
+        $output->writeln(sprintf('%d builds were changed', $buildChangedCount));
     }
 }
