@@ -48,10 +48,6 @@ final class Api
                         'contents' => $platform,
                     ],
                     [
-                        'name' => 'protectedByAccount',
-                        'contents' => (bool)$protectedByAccount,
-                    ],
-                    [
                         'name' => 'file',
                         'contents' => fopen($appFilePath, 'r'),
                     ],
@@ -72,6 +68,10 @@ final class Api
 
         if (!isset($responseData['publicKey'])) {
             throw new \Exception('Missing public key in response');
+        }
+
+        if ($protectedByAccount) {
+            $this->protectBuild($responseData['publicKey']);
         }
 
         $apiResponse = new UploadResponse($responseData['publicKey'], $responseData['appURL']);
